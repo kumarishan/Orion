@@ -1,21 +1,15 @@
 <?php
+
 class OrionObjectStore {
   
   private static $objectStore = null;
 
-  public static function createObject( $filename, $className, $session=false ){
+  public static function createObject( $className, $session=false, $params = array() ){
     
-    //get the code from the remote
-   
-    //load the file
-    include $filename;
-
-    $obj = new $className;
+    $obj = new $className($params);
     if( $session == false ){
       $objectStore[$className.':0'] = $obj;
     }else{
-      //call some of the initialization from persistent controller
-
       $objectStore[$className.':'.$session] = $obj;
     }
      
@@ -29,5 +23,23 @@ class OrionObjectStore {
     }
   }
 
+  public static function destroyObject( $className, $session=false){
+    if($session == false){
+      $session = 0;
+    }
+    unset($objectStore[$className.':'.$session]);
+  }
+  
+  public static function checkStore( $className , $session = false){
+    if($session == false){
+      $session = 0;
+    }
+    if( isset($objectStore[$className.':'.$session])){
+      return true;
+    }else {
+      return false;
+    }
+  }
 }
+
 ?>
