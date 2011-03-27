@@ -26,7 +26,7 @@ class OrionRemoteObjectDirectory {
   }
 
   private static function getNodes($className, $session=false){
-
+    //ask orionController to do dht lookup    
   }
 
   public static function checkEntry($className, $session=false){

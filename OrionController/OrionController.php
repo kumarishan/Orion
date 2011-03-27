@@ -18,7 +18,7 @@ class OrionController {
     return $objStub;
 
   }
-
+  
   private static function enterRemoteObjectInfo($className, $session=false, $nodeList){
   
   }
@@ -34,6 +34,16 @@ class OrionController {
   public static function createLocalObject($className, $session=false, $params = array()){
     OrionScheduler::scheduleObject($className, $session, $params);
   }
+
+  public static function findManager($className, $session=false){
+    if($session == false){
+      $session = 0;
+    }
+
+  }
+
+
+
 }
 
 ?>
